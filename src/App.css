@@ -8,7 +8,7 @@
 .throw-container {
   display: flex;
   flex-direction: column;
-  width: 64em;
+  width: 32em;
   height: 100%;
   border-right-width: 1px;
   background-color: white;

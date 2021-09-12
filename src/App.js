@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { ThrowInput } from "./components/ThrowInput/ThrowInput";
+import { ViewBox } from "./components/ViewBox/ViewBox";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -53,7 +54,7 @@ export default class App extends React.Component {
             ))}
           </div>
         </div>
-        <div className="view-container">Look at it</div>
+        <div className="view-container"><ViewBox></ViewBox></div>
       </div>
     );
   }
