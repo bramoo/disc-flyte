@@ -1,0 +1,29 @@
+.container {
+    background-color: white;
+    border-bottom-width: 1px;
+}
+
+.container:last-child {
+    border-width: 0px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.heading {
+    color: darkslategray;
+    font-weight: 100;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+.inputs {
+    background-color: grey;
+    padding: 1rem;
+}
