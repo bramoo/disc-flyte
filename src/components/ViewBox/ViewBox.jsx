@@ -1,5 +1,6 @@
 import React from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls } from "@react-three/drei"
 import "./ViewBox.css";
 
 export class ViewBox extends React.Component {
@@ -7,11 +8,11 @@ export class ViewBox extends React.Component {
 
         return (<div className="view-box">
             <Canvas>
+                <OrbitControls enablePan={false} />
+
                 <mesh>
-                    <ambientLight intensity={0.1} />
-                    <directionalLight color="red" position={[0, 0, 5]} />
                     <boxGeometry />
-                    <meshStandardMaterial />
+                    <meshNormalMaterial />
                 </mesh>
             </Canvas>
         </div>)
