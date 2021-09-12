@@ -1,6 +1,7 @@
 {
   "name": "disc-flyte",
   "version": "0.1.0",
+  "homepage": "https://bramoo.github.io/disc-flyte/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
