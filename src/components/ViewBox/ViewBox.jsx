@@ -1,44 +1,26 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import "./ViewBox.css";
+import { Line, OrbitControls } from "@react-three/drei";
 import { vec3 } from "../../simulation/util";
+import "./ViewBox.css";
 
-export class ViewBox extends React.Component {
-  render() {
-    let vertices = new Float32Array();
+export function ViewBox(props) {
+    let vertices = [0, 0, 0];
     let count = 0;
-    if(this.props.result) {
-        let points = this.props.result.pos_g.filter((v) => !!v).map((v) => vec3(v.x, v.y, v.z));
-        vertices = new Float32Array(
-          points.reduce((a, p) => a.concat([p.x, p.y, p.z]), [])
-        );
+    if (props.result) {
+        let points = props.result.pos_g.filter((v) => !!v).map((v) => vec3(v.x, v.y, v.z));
+        vertices = points.reduce((a, p) => a.concat([p.y, p.z, p.x]), []);
         count = points.length;
     }
 
     return (
-      <div className="view-box">
-        <Canvas>
-          <OrbitControls enablePan={false} />
-
-          <line>
-              <lineBasicMaterial color="red" linewidth={5} />
-            <bufferGeometry>
-              <bufferAttribute
-                attachObject={["attributes", "position"]}
-                array={vertices}
-                itemSize={3}
-                count={count}
-              />
-            </bufferGeometry>
-          </line>
-
-          <mesh>
-            <boxGeometry />
-            <meshNormalMaterial />
-          </mesh>
-        </Canvas>
-      </div>
+        <div className="view-box">
+            <p>{props.result && props.result.pos_g && props.result.pos_g[2].x}</p>
+            <Canvas camera={{ position: [0, 0, -5] }}>
+                <OrbitControls enablePan={false} />
+                <axesHelper />
+                <Line color="red" points={vertices} />
+            </Canvas>
+        </div>
     );
-  }
 }

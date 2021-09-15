@@ -8,38 +8,36 @@ import huckit from "./simulation/simulate.js";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+    let throws = [
+      {
+        disc: 0, // aviar
+        mass: 175,
+        speed: 50,
+        spin: 27,
+        direction: 1,
+        launchAngle: 10,
+        noseAngle: 4,
+        rollAngle: 8,
+      },
+      {
+        disc: 1,
+        mass: 170,
+        speed: 30,
+        spin: 20,
+        direction: 1,
+        launchAngle: 8,
+        noseAngle: 6,
+        rollAngle: 0,
+      },
+    ];
+    let result = this.simulate(throws[0]);
     this.state = {
-      throws: [
-        {
-          disc: 0, // aviar
-          mass: 175,
-          speed: 50,
-          spin: 27,
-          direction: 1,
-          launchAngle: 10,
-          noseAngle: 4,
-          rollAngle: 8,
-          result: null,
-        },
-        {
-          disc: 1,
-          mass: 170,
-          speed: 30,
-          spin: 20,
-          direction: 1,
-          launchAngle: 8,
-          noseAngle: 6,
-          rollAngle: 0,
-          result: null,
-        },
-      ],
-      result: null,
+      throws: throws,
+      result: result,
     };
-
-    this.handleThrowChange(0, this.state.throws[0]);
   }
 
-  handleThrowChange(index, t) {
+  simulate(t) {
     let params = [
       (t.rollAngle * Math.PI) / 180.0,
       (t.noseAngle * Math.PI) / 180.0,
@@ -47,10 +45,14 @@ export default class App extends React.Component {
       1.8,
       t.speed * 0.44704,
       t.spin * t.direction * 2 * Math.PI,
-      t.mass,
+      t.mass / 1000,
     ];
-    let res = huckit(discs[t.disc], ...params);
-    this.setState({ result: res });
+    return huckit(discs[t.disc], ...params);
+  }
+
+  handleThrowChange(index, t) {
+    let result = this.simulate(t);
+    this.setState({ result: result });
 
     let throws = [...this.state.throws];
     throws[index] = t;
