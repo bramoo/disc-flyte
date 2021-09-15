@@ -10,7 +10,6 @@ export default class Disc {
       this.jxy = 0; // Normalized mass moment of inertia about the roll/pitch axis in m^2
       this.jz = 0; // Normalized mass moment of inertia about the spin axis in m^2
       this.diam = 0; // Disc diameter in m
-      this.mass = 0; // Mass of disc in kg
     }
     
     getCl(aoa) {

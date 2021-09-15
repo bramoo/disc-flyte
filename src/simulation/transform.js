@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 
 export default class Transform {
     static groundDisc(angles) {
