@@ -8,7 +8,7 @@ export function InlineNumberInput(props) {
 
 	return (
 		<div>
-			<label htmlFor={this.id}>{props.label}</label>
+			<label htmlFor={id}>{props.label}</label>
 			<input
 				id={id}
 				name={props.name}
