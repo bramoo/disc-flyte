@@ -1,4 +1,11 @@
 {
-  "tabWidth": 4,
-  "useTabs": true
+  "overrides": [
+    {
+      "files": ["*.js", "*.jsx"],
+      "options": {
+        "tabWidth": 4,
+        "useTabs": true
+      }
+    }
+  ]
 }
