@@ -17,7 +17,7 @@ export function ThrowInput(props) {
 	const t = props.throw;
 
 	return (
-		<div className="container">
+		<div className="throw-input">
 			<header onClick={() => setOpen(!open)}>
 				<span className="heading">{discs[t.disc].name}</span>
 			</header>
@@ -31,7 +31,7 @@ export function ThrowInput(props) {
 						onChange={handleChange}
 					>
 						{discs.map((disc, index) => (
-							<option value={index}>{disc.name}</option>
+							<option key={disc.name} value={index}>{disc.name}</option>
 						))}
 					</SelectInput>
 					<InlineNumberInput

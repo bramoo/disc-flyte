@@ -10,6 +10,7 @@ export default class App extends React.Component {
     super(props);
     let throws = [
       {
+        id: 0,
         disc: 0, // aviar
         mass: 175,
         speed: 50,
@@ -20,6 +21,7 @@ export default class App extends React.Component {
         rollAngle: 8,
       },
       {
+        id: 1,
         disc: 1,
         mass: 170,
         speed: 30,
@@ -68,7 +70,7 @@ export default class App extends React.Component {
           <div className="throw-list">
             {this.state.throws.map((t, i) => (
               <ThrowInput
-                key={i}
+                key={t.id}
                 throw={t}
                 onThrowChange={this.handleThrowChange.bind(this, i)}
               />

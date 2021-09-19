@@ -7,7 +7,7 @@ export function SelectInput(props) {
 	const handleChange = (event) => props.onChange(event);
 
 	return (
-		<div>
+		<div className="select-input">
 			<label htmlFor={id}>{props.label}</label>
 			<select
 				id={id}

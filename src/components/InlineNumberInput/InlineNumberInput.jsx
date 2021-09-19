@@ -7,7 +7,7 @@ export function InlineNumberInput(props) {
 	const handleChange = (event) => props.onChange(event);
 
 	return (
-		<div>
+		<div className="inline-number-input">
 			<label htmlFor={id}>{props.label}</label>
 			<input
 				id={id}
