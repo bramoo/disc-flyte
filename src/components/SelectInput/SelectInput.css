@@ -1,14 +1,14 @@
-div {
+div.select-input {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
-label {
+.select-input > label {
     display: inline-block;
     width: 4rem;
 }
 
-select {
+.select-input > select {
     appearance: none;
     border-width: 1px;
     border-radius: 0.25rem;
