@@ -57,7 +57,9 @@ export default function App() {
 	};
 
 	return (
-		<div className="app-container">
+		<>
+			<ViewBox result={result}></ViewBox>
+			<h1>Disc Flyte</h1>
 			<div className="throw-container">
 				<h2 className="throw-header">Throws</h2>
 
@@ -73,9 +75,6 @@ export default function App() {
 					))}
 				</div>
 			</div>
-			<div className="view-container">
-				<ViewBox result={result}></ViewBox>
-			</div>
-		</div>
+		</>
 	);
 }
