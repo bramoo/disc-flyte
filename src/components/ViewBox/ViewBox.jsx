@@ -11,7 +11,10 @@ export function ViewBox(props) {
 	const length = 70;
 
 	return (
-		<Canvas camera={{ position: [0, 0, -5] }}>
+		<Canvas
+			resize={{ scroll: true, debounce: 0 }}
+			camera={{ position: [0, 0, -5] }}
+		>
 			<OrbitControls />
 
 			<ambientLight color={0x202020} />
