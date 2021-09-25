@@ -9,3 +9,12 @@ canvas {
     rgba(2, 0, 36, 1) 100%
   );
 }
+
+svg {
+  width: 100%;
+  height: calc(100vh - 5em);
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
