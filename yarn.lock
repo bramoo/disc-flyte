@@ -5285,6 +5285,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"d3-delaunay@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "d3-delaunay@npm:6.0.2"
+  dependencies:
+    delaunator: 5
+  checksum: 80b18686dd7a5919a570000061f1515d106b7c7e3cba9da55706c312fc8f6de58a72674f2ea4eadc6694611f2df59f82c8b9d304845dd8b7903ee1f303aa5865
+  languageName: node
+  linkType: hard
+
 "d3-interpolate@npm:1 - 3":
   version: 3.0.1
   resolution: "d3-interpolate@npm:3.0.1"
@@ -5508,6 +5517,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"delaunator@npm:5":
+  version: 5.0.0
+  resolution: "delaunator@npm:5.0.0"
+  dependencies:
+    robust-predicates: ^3.0.0
+  checksum: d6764188442b7f7c6bcacebd96edc00e35f542a96f1af3ef600e586bfb9849a3682c489c0ab423440c90bc4c7cac77f28761babff76fa29e193e1cf50a95b860
+  languageName: node
+  linkType: hard
+
 "delayed-stream@npm:~1.0.0":
   version: 1.0.0
   resolution: "delayed-stream@npm:1.0.0"
@@ -5625,6 +5643,7 @@ __metadata:
     "@testing-library/jest-dom": ^5.11.4
     "@testing-library/react": ^11.1.0
     "@testing-library/user-event": ^12.1.10
+    d3-delaunay: ^6.0.2
     d3-scale-chromatic: ^3.0.0
     lodash: ^4.17.21
     react: ^17.0.2
@@ -13013,6 +13032,13 @@ resolve@1.18.1:
     hash-base: ^3.0.0
     inherits: ^2.0.1
   checksum: 006accc40578ee2beae382757c4ce2908a826b27e2b079efdcd2959ee544ddf210b7b5d7d5e80467807604244e7388427330f5c6d4cd61e6edaddc5773ccc393
+  languageName: node
+  linkType: hard
+
+"robust-predicates@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "robust-predicates@npm:3.0.1"
+  checksum: 45e9de2df4380da84a2a561d4fd54ea92194e878b93ed19d5e4bc90f4e834a13755e846c8516bab8360190309696f0564a0150386c52ef01f70f2b388449dac5
   languageName: node
   linkType: hard
 
