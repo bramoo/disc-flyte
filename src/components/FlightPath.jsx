@@ -8,23 +8,10 @@ const intensify = (x) => 1 / (1 + Math.exp(intensity * (x - 0.5)));
 
 export function FlightPath(props) {
 	const radius = props.radius;
-	const aspect = props.aspect;
+	const points = props.points;
+	const eulers = props.eulers;
 
-	// fix coordinate system
-	const points = props.result.pos_g.map((v) => vec3(v.y, v.z, v.x));
-	// ori_g: x=roll y=pitch z=yaw, applied in that order
-	const eulers = props.result.ori_g.map(
-		(orientation) =>
-			new THREE.Euler(
-				-orientation.y,
-				orientation.z,
-				-orientation.x,
-				"ZXY"
-			)
-	);
-	const hyzer = props.result.ori_g.map(
-		(orientation) => (orientation.x + Math.PI / 2) / Math.PI
-	);
+	const hyzer = eulers.map((e) => (e.z + Math.PI / 2) / Math.PI);
 
 	const lefts = eulers.map((e, i) =>
 		vec3(-radius, 0, 0).applyEuler(e).add(points[i])
@@ -76,24 +63,13 @@ export function FlightPath(props) {
 	}, [lefts, rights, normals, hyzer]);
 
 	return (
-		<>
-			<mesh
-				scale={[radius, radius * aspect, radius]}
-				position={points[0]}
-				rotation={eulers[0]}
-			>
-				<sphereGeometry />
-				<meshStandardMaterial color="#ffa500" />
-			</mesh>
-
-			<mesh>
-				<primitive object={ribbonGeometry} attach="geometry" />
-				<meshBasicMaterial
-					toneMapped={false}
-					vertexColors
-					side={THREE.DoubleSide}
-				/>
-			</mesh>
-		</>
+		<mesh>
+			<primitive object={ribbonGeometry} attach="geometry" />
+			<meshBasicMaterial
+				toneMapped={false}
+				vertexColors
+				side={THREE.DoubleSide}
+			/>
+		</mesh>
 	);
 }
