@@ -44,7 +44,7 @@ export function ViewBox(props) {
 	return (
 		<div className="ui">
 			<div className="settings-camera">
-				<input id="follow" type="checkbox" ref={followRef} />
+				<input id="follow" type="checkbox" ref={followRef} defaultChecked={true} />
 				<label htmlFor="follow">Follow disc</label>
 
 				<input type="button" value="Full path" />
@@ -52,7 +52,7 @@ export function ViewBox(props) {
 				<input type="button" value="Landing" />
 			</div>
 			<div className="scrubber">
-				<input ref={scrubberRef} type="range" min="0" max={count - 1} />
+				<input ref={scrubberRef} type="range" min="0" max={count - 1} defaultValue="0" />
 			</div>
 			<Canvas
 				className="main"
