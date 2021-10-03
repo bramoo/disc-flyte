@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { vec3 } from "../../simulation/util";
 
-import { Disc } from "../Disc";
-import { FlightPath } from "../FlightPath";
+import Disc from "../Disc";
+import FlightPath from "../FlightPath";
+import FlightControls from "../FlightControls";
 
 import "./ViewBox.css";
 
@@ -13,6 +13,8 @@ const buffer = 5;
 
 export function ViewBox(props) {
 	const scrubberRef = useRef();
+	const followRef = useRef();
+	const discRef = useRef();
 	const radius = 0.1;
 	const aspect = 0.1;
 
@@ -37,10 +39,19 @@ export function ViewBox(props) {
 
 	const width = 10;
 	const length = zmax + 2 * buffer;
+	const centre = vec3(0, 0, zmax / 2);
 
 	return (
 		<div className="ui">
-			<div class="scrubber">
+			<div className="settings-camera">
+				<input id="follow" type="checkbox" ref={followRef} />
+				<label htmlFor="follow">Follow disc</label>
+
+				<input type="button" value="Full path" />
+				<input type="button" value="Thrower" />
+				<input type="button" value="Landing" />
+			</div>
+			<div className="scrubber">
 				<input ref={scrubberRef} type="range" min="0" max={count - 1} />
 			</div>
 			<Canvas
@@ -48,17 +59,24 @@ export function ViewBox(props) {
 				resize={{ scroll: true, debounce: 0 }}
 				camera={{ position: [0, 0, -5] }}
 			>
-				<OrbitControls target={[0, 0, 35]} />
+				<FlightControls
+					disc={discRef}
+					follow={followRef}
+					centre={centre}
+					scrubber={scrubberRef}
+					points={points}
+					eulers={eulers}
+				/>
 
 				<ambientLight color={0x202020} />
 				<pointLight position={[0, 20, 25]} intensity={0.5} decay={2} />
 
 				<Disc
+					ref={discRef}
 					radius={radius}
 					aspect={aspect}
-					points={points}
-					eulers={eulers}
-					scrubber={scrubberRef}
+					position={points[0]}
+					rotation={eulers[0]}
 				/>
 				<FlightPath radius={radius} points={points} eulers={eulers} />
 

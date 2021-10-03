@@ -6,7 +6,7 @@ import { vec3 } from "../simulation/util";
 const intensity = 30;
 const intensify = (x) => 1 / (1 + Math.exp(intensity * (x - 0.5)));
 
-export function FlightPath(props) {
+export default function FlightPath(props) {
 	const radius = props.radius;
 	const points = props.points;
 	const eulers = props.eulers;
