@@ -12,8 +12,12 @@ import "./ViewBox.css";
 const buffer = 5;
 
 export function ViewBox(props) {
+	const controlsRef = useRef();
 	const scrubberRef = useRef();
 	const followRef = useRef();
+	const fullRef = useRef();
+	const throwerRef = useRef();
+	const landingRef = useRef();
 	const discRef = useRef();
 	const radius = 0.1;
 	const aspect = 0.1;
@@ -44,12 +48,12 @@ export function ViewBox(props) {
 	return (
 		<div className="ui">
 			<div className="settings-camera">
-				<input id="follow" type="checkbox" ref={followRef} defaultChecked={true} />
+				<input ref={followRef} id="follow" type="checkbox" defaultChecked={true} />
 				<label htmlFor="follow">Follow disc</label>
 
-				<input type="button" value="Full path" />
-				<input type="button" value="Thrower" />
-				<input type="button" value="Landing" />
+				<input ref={fullRef} type="button" value="Full path" />
+				<input ref={throwerRef} type="button" value="Thrower" />
+				<input ref={landingRef} type="button" value="Landing" />
 			</div>
 			<div className="scrubber">
 				<input ref={scrubberRef} type="range" min="0" max={count - 1} defaultValue="0" />
@@ -60,8 +64,12 @@ export function ViewBox(props) {
 				camera={{ position: [0, 0, -5] }}
 			>
 				<FlightControls
+					ref={controlsRef}
 					disc={discRef}
 					follow={followRef}
+					full={fullRef}
+					thrower={throwerRef}
+					landing={landingRef}
 					centre={centre}
 					scrubber={scrubberRef}
 					points={points}
