@@ -5629,6 +5629,7 @@ __metadata:
     lodash: ^4.17.21
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-merge-refs: ^1.1.0
     react-scripts: 4.0.3
     three: ^0.132.2
     web-vitals: ^1.0.1
