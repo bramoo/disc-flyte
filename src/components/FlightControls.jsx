@@ -22,12 +22,12 @@ export const FlightControls = React.forwardRef(
 	) => {
 		const controlsRef = useRef();
 
-		const initialPos = new Vector3(0, 1.8, -5);
+		const initialPos = points[0].clone().setZ(-5);
 		let lastIndex = scrubberRef.current.value;
 		let diff = new Vector3();
 		let targetLook = points[lastIndex].clone();
-		let bbox = new Box3().setFromPoints(points);
 		let targetPos = initialPos.clone();
+		let bbox = new Box3().setFromPoints(points);
 		let doLerp = true;
 
 		const vectorDifference = (vec3, from, to) => vec3.copy(to).sub(from);
@@ -43,7 +43,7 @@ export const FlightControls = React.forwardRef(
 			doLerp = true;
 			followRef.current.checked = false;
 			targetLook.copy(points[0]);
-			targetPos.set(0, 1.8, -5);
+			targetPos.copy(points[0]).setZ(-5);
 		}
 
 		const handleLanding = () => {
