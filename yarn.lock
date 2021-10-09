@@ -5627,6 +5627,7 @@ __metadata:
     "@testing-library/user-event": ^12.1.10
     d3-scale-chromatic: ^3.0.0
     lodash: ^4.17.21
+    mitt: ^3.0.0
     react: ^17.0.2
     react-dom: ^17.0.2
     react-merge-refs: ^1.1.0
@@ -10003,6 +10004,13 @@ fsevents@^1.2.7:
     stream-each: ^1.1.0
     through2: ^2.0.0
   checksum: 84b3d9889621d293f9a596bafe60df863b330c88fc19215ced8f603c605fc7e1bf06f8e036edf301bd630a03fd5d9d7d23d5d6b9a4802c30ca864d800f0bd9f8
+  languageName: node
+  linkType: hard
+
+"mitt@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "mitt@npm:3.0.0"
+  checksum: f7be5049d27d18b1dbe9408452d66376fa60ae4a79fe9319869d1b90ae8cbaedadc7e9dab30b32d781411256d468be5538996bb7368941c09009ef6bbfa6bfc7
   languageName: node
   linkType: hard
 

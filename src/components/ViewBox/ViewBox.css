@@ -1,20 +1,3 @@
-.ui {
-  width: 100%;
-  height: calc(100vh - 5em);
-  display: grid;
-  grid-template-columns: 10em 1fr 10em;
-  grid-template-rows: 5em 1fr 5em;
-  grid-template-areas:
-    "header header header"
-    "left main right"
-    "footer footer footer";
-}
-
-.main {
-  grid-row: 1/-1;
-  grid-column: 1/-1;
-}
-
 canvas {
   background: rgb(0, 212, 255);
   background: linear-gradient(
@@ -23,21 +6,4 @@ canvas {
     rgba(9, 9, 121, 1) 65%,
     rgba(2, 0, 36, 1) 100%
   );
-}
-
-.scrubber {
-  grid-area: footer;
-  z-index: 10;
-  background-color: #0003;
-}
-
-.scrubber > input {
-  width: 100%;
-  height: 100%;
-}
-
-.settings-camera {
-  grid-area: right;
-  z-index: 10;
-  color: white;
 }

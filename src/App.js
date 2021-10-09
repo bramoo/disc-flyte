@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./App.css";
+import { CameraSettings } from "./components/CameraSettings";
 import { ThrowInput } from "./components/ThrowInput/ThrowInput";
 import { ViewBox } from "./components/ViewBox/ViewBox";
 import { discs } from "./simulation/discs";
@@ -44,6 +45,8 @@ const simulate = (t) => {
 };
 
 export default function App() {
+	let cameraSettingsRef = useRef({});
+	let scrubberRef = useRef();
 	let [throws, setThrows] = useState(initialThrows);
 	let [result, setResult] = useState(simulate(throws[0]));
 
@@ -57,9 +60,13 @@ export default function App() {
 	};
 
 	return (
-		<>
-			<ViewBox result={result}></ViewBox>
-			<h1>Disc Flyte</h1>
+		<div className="ui">
+			<h1 className="header">Disc Flyte</h1>
+			<ViewBox className="main" result={result} cameraSettings={cameraSettingsRef} scrubber={scrubberRef}></ViewBox>
+			<div className="scrubber">
+				<input ref={scrubberRef} type="range" min="0" max={result.pos_g.length - 1} defaultValue="0" />
+			</div>
+			<CameraSettings className="camera-settings" ref={cameraSettingsRef} />
 			<div className="throw-container">
 				<h2 className="throw-header">Throws</h2>
 
@@ -75,6 +82,6 @@ export default function App() {
 					))}
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

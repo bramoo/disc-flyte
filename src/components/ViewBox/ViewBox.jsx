@@ -11,13 +11,13 @@ import "./ViewBox.css";
 
 const buffer = 5;
 
-export function ViewBox(props) {
+export function ViewBox({
+	className,
+	cameraSettings: cameraSettingsRef,
+	scrubber: scrubberRef,
+	...props
+}) {
 	const controlsRef = useRef();
-	const scrubberRef = useRef();
-	const followRef = useRef();
-	const fullRef = useRef();
-	const throwerRef = useRef();
-	const landingRef = useRef();
 	const discRef = useRef();
 	const radius = 0.1;
 	const aspect = 0.1;
@@ -39,63 +39,46 @@ export function ViewBox(props) {
 		Math,
 		points.map((p) => p.z)
 	);
-	let count = points.length;
 
 	const width = 10;
 	const length = zmax + 2 * buffer;
 	const centre = vec3(0, 0, zmax / 2);
 
 	return (
-		<div className="ui">
-			<div className="settings-camera">
-				<input ref={followRef} id="follow" type="checkbox" defaultChecked={true} />
-				<label htmlFor="follow">Follow disc</label>
+		<Canvas
+			className={className}
+			resize={{ scroll: true, debounce: 0 }}
+			camera={{ position: [0, 0, -5] }}
+		>
+			<FlightControls
+				ref={controlsRef}
+				disc={discRef}
+				cameraSettings={cameraSettingsRef}
+				centre={centre}
+				scrubber={scrubberRef}
+				points={points}
+				eulers={eulers}
+			/>
 
-				<input ref={fullRef} type="button" value="Full path" />
-				<input ref={throwerRef} type="button" value="Thrower" />
-				<input ref={landingRef} type="button" value="Landing" />
-			</div>
-			<div className="scrubber">
-				<input ref={scrubberRef} type="range" min="0" max={count - 1} defaultValue="0" />
-			</div>
-			<Canvas
-				className="main"
-				resize={{ scroll: true, debounce: 0 }}
-				camera={{ position: [0, 0, -5] }}
+			<ambientLight color={0x202020} />
+			<pointLight position={[0, 20, 25]} intensity={0.5} decay={2} />
+
+			<Disc
+				ref={discRef}
+				radius={radius}
+				aspect={aspect}
+				position={points[0]}
+				rotation={eulers[0]}
+			/>
+			<FlightPath radius={radius} points={points} eulers={eulers} />
+
+			<mesh
+				position={[0, 0, length / 2 - buffer]}
+				rotation={[-Math.PI / 2, 0, 0]}
 			>
-				<FlightControls
-					ref={controlsRef}
-					disc={discRef}
-					follow={followRef}
-					full={fullRef}
-					thrower={throwerRef}
-					landing={landingRef}
-					centre={centre}
-					scrubber={scrubberRef}
-					points={points}
-					eulers={eulers}
-				/>
-
-				<ambientLight color={0x202020} />
-				<pointLight position={[0, 20, 25]} intensity={0.5} decay={2} />
-
-				<Disc
-					ref={discRef}
-					radius={radius}
-					aspect={aspect}
-					position={points[0]}
-					rotation={eulers[0]}
-				/>
-				<FlightPath radius={radius} points={points} eulers={eulers} />
-
-				<mesh
-					position={[0, 0, length / 2 - buffer]}
-					rotation={[-Math.PI / 2, 0, 0]}
-				>
-					<planeGeometry args={[width, length]} />
-					<meshStandardMaterial color="#00aa00" />
-				</mesh>
-			</Canvas>
-		</div>
+				<planeGeometry args={[width, length]} />
+				<meshStandardMaterial color="#00aa00" />
+			</mesh>
+		</Canvas>
 	);
 }

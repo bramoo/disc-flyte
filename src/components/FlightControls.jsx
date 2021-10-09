@@ -8,10 +8,7 @@ export const FlightControls = React.forwardRef(
 	(
 		{
 			disc: discRef,
-			follow: followRef,
-			full: fullRef,
-			thrower: throwerRef,
-			landing: landingRef,
+			cameraSettings: cameraSettingsRef,
 			scrubber: scrubberRef,
 			centre,
 			points,
@@ -32,44 +29,57 @@ export const FlightControls = React.forwardRef(
 
 		const vectorDifference = (vec3, from, to) => vec3.copy(to).sub(from);
 
+		const handleFollow = () => {
+			if (cameraSettingsRef.current.follow) {
+				doLerp = true;
+				targetLook.copy(points[lastIndex]);
+			}
+		};
+
 		const handleFull = () => {
 			doLerp = true;
-			followRef.current.checked = false;
+			cameraSettingsRef.current.setFollow(false);
 			targetLook.copy(centre);
 			targetPos.set(bbox.max.x + 5, bbox.max.y, bbox.min.z - 5);
 		};
 
 		const handleThrower = () => {
 			doLerp = true;
-			followRef.current.checked = false;
+			cameraSettingsRef.current.setFollow(false);
 			targetLook.copy(points[0]);
 			targetPos.copy(points[0]).setZ(-5);
-		}
+		};
 
 		const handleLanding = () => {
 			doLerp = true;
-			followRef.current.checked = false;
-			const last = points[points.length - 1]
+			cameraSettingsRef.current.setFollow(false);
+			const last = points[points.length - 1];
 			targetLook.copy(last);
 			targetPos.copy(bbox.max).add(new Vector3(5, 0, 5));
-		}
+		};
 
 		useEffect(() => {
-			const r = fullRef.current;
-			r.addEventListener("click", handleFull);
-			return () => r.removeEventListener("click", handleFull);
+			const e = cameraSettingsRef.current.events;
+			e.on("follow", handleFollow);
+			return () => e.off("follow", handleFollow);
 		});
 
 		useEffect(() => {
-			const r = throwerRef.current;
-			r.addEventListener("click", handleThrower);
-			return () => r.removeEventListener("click", handleThrower);
+			const e = cameraSettingsRef.current.events;
+			e.on("full", handleFull);
+			return () => e.off("full", handleFull);
 		});
 
 		useEffect(() => {
-			const r = landingRef.current;
-			r.addEventListener("click", handleLanding);
-			return () => r.removeEventListener("click", handleLanding);
+			const e = cameraSettingsRef.current.events;
+			e.on("thrower", handleThrower);
+			return () => e.off("thrower", handleThrower);
+		});
+
+		useEffect(() => {
+			const e = cameraSettingsRef.current.events;
+			e.on("landing", handleLanding);
+			return () => e.off("landing", handleLanding);
 		});
 
 		useFrame(() => {
@@ -80,7 +90,7 @@ export const FlightControls = React.forwardRef(
 				discRef.current.position.copy(points[index]);
 				discRef.current.rotation.copy(eulers[index]);
 
-				if (followRef.current.checked) {
+				if (cameraSettingsRef.current.follow) {
 					doLerp = true;
 					targetPos.add(diff);
 					targetLook.copy(points[index]);
